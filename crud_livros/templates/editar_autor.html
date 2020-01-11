@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{%block content%}
+<div class="row">
+    <div class="col">
+        <form style="width: 800px; margin: 0 auto;" class="mt-3" method="post" action="">
+            {{ formulario.hidden_tag() }}
+          <div class="form-group">
+            <label for="nomeAutor">Nome do autor</label>
+            {{ formulario.nome_autor(class="form-control", value=autor.nome)}}
+          </div>
+            {{ formulario.registrar(class="btn btn-primary")}}
+        </form>
+    </div>
+</div>
+<script>
+</script>
+{% endblock content%}
