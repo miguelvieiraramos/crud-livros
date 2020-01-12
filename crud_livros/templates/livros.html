@@ -1,0 +1,62 @@
+{% extends 'layout.html'%}
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <a href="{{ url_for('livros.adicionar_livro') }}">
+                <button type="button" class="btn btn-primary btn-sm mt-5" style="margin-left: 840px;">Adicionar livro</button>
+            </a>
+        </div>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="row message">
+        <div class="col">
+            <div class="{{ category }}" role="alert" style="width: 800px; margin:0 auto;">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped mt-2" style="width: 800px; margin: 0 auto;">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Livro</th>
+                  <th scope="col">Autor</th>
+                  <th scope="col">Acoes</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% if livros %}
+              {% for livro in livros %}
+                <tr>
+                  <td>{{ livro.0.id}}</td>
+                  <td>{{ livro.0.nome}}</td>
+                  <td>{{ livro.1.nome }}</td>
+                  <td>
+                      <a href="{{ url_for('livros.editar_livro', id_livro=livro.0.id)}}"><button type="button" class="btn btn-primary btn-sm">Editar</button></a>
+                      <a href="{{ url_for('livros.excluir_livro', id_livro=livro.0.id)}}"><button type="button" class="btn btn-danger btn-sm">Excluir</button></a>
+                  </td>
+                </tr>
+              {% endfor %}
+              {% endif %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const rows = document.querySelectorAll('.row');
+        setTimeout( () => {
+            rows.forEach(row => {
+                if(row.className == 'row message') {
+                    row.style.display = 'none';
+                }
+            })
+        }, 3000);
+    </script>
+{% endblock content%}
