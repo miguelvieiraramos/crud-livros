@@ -5,25 +5,13 @@ class Autor(db.Model):
     __tablename__ = 'autor'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(80), unique=True, nullable=False)
-    livros = db.relationship('Livro', backref='autor')
+    livros = db.relationship('Livro', backref='autor', cascade="all, delete")
 
     def __repr__(self):
         return f'{self.nome} {self.id}'
 
     def __init__(self, nome):
         self.nome = nome
-
-    # @staticmethod
-    # def capturar_autor(self, id_autor):
-    #     return Autor.query.get_or_404(id_autor)
-    #
-    # @staticmethod
-    # def capturar_autores():
-    #     autores = Autor.query.all()
-    #     autores_organizados = []
-    #     for autor in autores:
-    #         autores_organizados.append((autor.id, autor.nome))
-    #     return autores_organizados
 
 
 class Livro(db.Model):
