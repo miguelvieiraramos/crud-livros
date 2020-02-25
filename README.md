@@ -36,7 +36,7 @@ The following string connects to a postgres database but you can connect to any 
 export SQLALCHEMY_DATABASE_URI="postgresql://user:password@localhost/database"
 ```
 
-Creating the tables and app context.
+Creating tables and app context.
 In a nutshell:
 ```
 >>> from crud_livros import create_app, db
